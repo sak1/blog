@@ -1,0 +1,50 @@
+MySQL无法连接
+[root ~]# mysql -u root
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password:NO)
+
+MySQL中重新控制root用户。
+
+危险：危险的操作
+
+启动会话ssh（如果可能，使用root）。
+my.cnf使用编辑文件。
+
+sudo vi /etc/my.cnf
+将行添加到mysqld块。*
+
+skip-grant-tables
+保存并退出。
+
+重新启动MySQL服务。
+
+service mysql restart
+检查服务状态。
+
+service mysql status
+连接到mysql。
+
+mysql
+使用主数据库。
+
+use mysql;
+重新定义用户根密码。
+
+UPDATE user SET `authentication_string` = PASSWORD('myNuevoPassword') WHERE `User` = 'root'; 
+编辑文件my.cnf。
+
+sudo vi /etc/my.cnf
+擦除线。
+
+skip-grant-tables
+保存并退出。
+
+重新启动MySQL服务。
+
+service mysqld restart
+检查服务状态。
+
+service mysql status
+连接到数据库。
+
+mysql -u root -p
+出现提示时输入新密码。
